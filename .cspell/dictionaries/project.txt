@@ -1,6 +1,7 @@
 asexplicit
 ensurepath
 esbenp
+firma
 generis
 glek
 glektarssza
