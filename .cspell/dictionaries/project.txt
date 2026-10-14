@@ -21,3 +21,4 @@ sessionx
 tarssza
 terrafirmcraft
 unstub
+nvmrc
