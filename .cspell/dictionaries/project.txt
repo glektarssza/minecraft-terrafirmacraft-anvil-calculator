@@ -1,4 +1,7 @@
 asexplicit
+copybuffer
+copypath
+direnv
 ensurepath
 esbenp
 firma
