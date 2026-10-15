@@ -8,6 +8,8 @@
         "mads-hartmann.bash-ide-vscode",
         "github.remotehub",
         "github.vscode-pull-request-github",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "ms-azuretools.vscode-containers",
+        "ms-vscode-remote.remote-containers"
     ]
 }
