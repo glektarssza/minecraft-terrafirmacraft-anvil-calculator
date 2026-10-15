@@ -1,20 +1,40 @@
+# yaml-language-server: $schema=https://www.schemastore.org/dependabot-2.0.json
 version: 2
 updates:
   - directory: /
     package-ecosystem: github-actions
     patterns:
       - '*'
-    labels:
-      - Dependency
-    assignees:
-      - glektarssza
+    target-branch: main
     commit-message:
       include: scope
       prefix: '[Dependabot] '
     pull-request-branch-name:
       separator: /
-    rebase-strategy: auto
+    labels:
+      - Dependency
+    assignees:
+      - glektarssza
+    schedule:
+      interval: weekly
+      day: wednesday
+      time: '12:00'
+      timezone: Canada/Mountain
+  - directory: /
+    package-ecosystem: npm
+    patterns:
+      - '*'
+    versioning-strategy: increase
     target-branch: main
+    commit-message:
+      include: scope
+      prefix: '[Dependabot] '
+    pull-request-branch-name:
+      separator: /
+    labels:
+      - Dependency
+    assignees:
+      - glektarssza
     schedule:
       interval: weekly
       day: wednesday
