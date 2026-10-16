@@ -1,4 +1,5 @@
 asexplicit
+autobuild
 ensurepath
 esbenp
 firma
