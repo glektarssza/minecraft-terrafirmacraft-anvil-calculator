@@ -9,3 +9,46 @@
 
 # All .cmd files are treated as text files with Windows-style line endings with UTF-8 encoding by default.
 *.ini text eol=crlf encoding=utf-8
+
+# === Images ===
+
+# Pass all .png files through Git LFS
+*.png filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .jpeg files through Git LFS
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .jpg files through Git LFS
+*.jpg filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .gif files through Git LFS
+*.gif filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .bmp files through Git LFS
+*.bmp filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .tiff files through Git LFS
+*.tiff filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .ico files through Git LFS
+*.ico filter=lfs diff=lfs merge=lfs -text
+
+# === Fonts ===
+
+# Pass all .ttf files through Git LFS
+*.ttf filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .otf files through Git LFS
+*.otf filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .woff files through Git LFS
+*.woff filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .woff2 files through Git LFS
+*.woff2 filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .eot files through Git LFS
+*.eot filter=lfs diff=lfs merge=lfs -text
+
+# Pass all .fnt files through Git LFS
+*.fnt filter=lfs diff=lfs merge=lfs -text
