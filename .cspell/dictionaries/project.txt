@@ -12,6 +12,7 @@ iregex
 mapfile
 mpre
 netrwhist
+noarchive
 noconfirm
 noninfringement
 nvmrc
