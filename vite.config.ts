@@ -1,5 +1,6 @@
 //-- NodeJS
 import os from 'node:os';
+import path from 'node:path';
 
 //-- NPM Packages
 import {playwright as browserPlaywright} from '@vitest/browser-playwright';
@@ -12,12 +13,21 @@ const config = defineConfig(({mode}) => {
         resolve: {
             extensions: ['.ts', '.js']
         },
+        root: path.resolve(import.meta.dirname, './src/'),
+        base:
+            mode !== 'development' ?
+                '/minecraft-tools/terrafirmcraft/anvil-calculator/'
+            :   '/',
         build: {
+            outDir: path.resolve(import.meta.dirname, './dist/'),
             minify: mode !== 'development',
             sourcemap: mode !== 'development' ? 'hidden' : true,
             emptyOutDir: false
         },
         test: {
+            alias: {
+                '@src': path.resolve(import.meta.dirname, './src/ts/')
+            },
             browser: {
                 enabled: true,
                 provider: browserPlaywright(),
@@ -32,6 +42,8 @@ const config = defineConfig(({mode}) => {
             clearMocks: true,
             unstubGlobals: true,
             unstubEnvs: true,
+            dir: path.resolve(import.meta.dirname, './tests/'),
+            name: 'TerraFirmaCraft Anvil Calculator',
             maxConcurrency: Math.max(Math.floor(os.cpus().length / 2), 1),
             coverage: {
                 enabled: true,
