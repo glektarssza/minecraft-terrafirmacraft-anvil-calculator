@@ -79,7 +79,7 @@ jobs:
           cache: true
           cache_dependency_path: ./pnpm-lock.yaml
       - id: setup-pnpm-package-manager-version
-        name: Setup NodeJS Package (Version)
+        name: Setup NodeJS Package Manager (Version)
         if: inputs.package-manager == 'pnpm' && inputs.package-manager-version != 'packageManifest'
         uses: pnpm/action-setup@v6
         with:
