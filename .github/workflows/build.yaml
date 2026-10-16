@@ -130,7 +130,6 @@ jobs:
         with:
           package_json_file: ./package.json
           run_install: false
-          standalone: false
           cache: true
           cache_dependency_path: ./pnpm-lock.yaml
       - id: setup-pnpm-package-manager-version
@@ -140,7 +139,6 @@ jobs:
         with:
           version: ${{inputs.package-manager-version}}
           run_install: false
-          standalone: false
           cache: true
           cache_dependency_path: ./pnpm-lock.yaml
       - id: setup-nodejs-version
