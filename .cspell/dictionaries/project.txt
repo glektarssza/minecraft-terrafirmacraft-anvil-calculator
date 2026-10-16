@@ -11,6 +11,7 @@ glektarssza
 hookspath
 hotfixes
 iregex
+linuxbrew
 mapfile
 mpre
 netrwhist
@@ -21,5 +22,6 @@ pipx
 remotehub
 safecrlf
 sessionx
+shellenv
 tarssza
 trixie
