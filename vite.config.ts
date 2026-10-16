@@ -74,8 +74,19 @@ const config = defineConfig(({mode}) => {
             reporters: 'default'
         },
         server: {
+            allowedHosts: ['localhost', '127.0.0.1'],
             fs: {
                 strict: process.env['VITEST_VSCODE'] === undefined
+            },
+            open: false,
+            port: 8333,
+            strictPort: true,
+            warmup: {
+                clientFiles: [
+                    path.relative(import.meta.dirname, './src/**/*.html'),
+                    path.relative(import.meta.dirname, './src/**/*.scss'),
+                    path.relative(import.meta.dirname, './src/**/*.ts')
+                ]
             }
         },
         plugins: [
