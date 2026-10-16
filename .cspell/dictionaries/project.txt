@@ -22,3 +22,4 @@ remotehub
 safecrlf
 sessionx
 tarssza
+trixie
