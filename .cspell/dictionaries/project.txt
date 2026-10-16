@@ -1,6 +1,8 @@
 asexplicit
+autobuild
 copybuffer
 copypath
+dbaeumer
 direnv
 ensurepath
 esbenp
@@ -15,8 +17,10 @@ linuxbrew
 mapfile
 mpre
 netrwhist
+noarchive
 noconfirm
 noninfringement
+nvmrc
 pacman
 pipx
 remotehub
@@ -24,4 +28,6 @@ safecrlf
 sessionx
 shellenv
 tarssza
+terrafirmcraft
 trixie
+unstub

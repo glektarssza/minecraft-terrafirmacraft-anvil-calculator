@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
-name: On Pull request
+name: On Pull Request
 on:
   pull_request:
     branches:
@@ -10,12 +10,50 @@ concurrency:
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 jobs:
+  build:
+    name: Build
+    permissions:
+      # -- Needed to clone the repository
+      contents: read
+    strategy:
+      fail-fast: true
+      matrix:
+        build-type:
+          - development
+          - production
+    uses: ./.github/workflows/build.yaml
+    with:
+      git-ref: ${{github.sha}}
+      build-type: ${{matrix.build-type}}
+      node-version: nvmrc
+      package-manager: pnpm
+      package-manager-version: packageManifest
+      upload-artifacts: true
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}
+  test:
+    name: Test
+    permissions:
+      # -- Needed to clone the repository
+      contents: read
+    uses: ./.github/workflows/test.yaml
+    with:
+      node-version: nvmrc
+      package-manager: pnpm
+      package-manager-version: packageManifest
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}
   lint:
     name: Lint
     permissions:
       # -- Needed to clone the repository
       contents: read
     uses: ./.github/workflows/lint.yaml
+    with:
+      git-ref: ${{github.sha}}
+      node-version: nvmrc
+      package-manager: pnpm
+      package-manager-version: packageManifest
     secrets:
       github-token: ${{secrets.GITHUB_TOKEN}}
   spell-check:
@@ -24,5 +62,10 @@ jobs:
       # -- Needed to clone the repository
       contents: read
     uses: ./.github/workflows/spell-check.yaml
+    with:
+      git-ref: ${{github.sha}}
+      node-version: nvmrc
+      package-manager: pnpm
+      package-manager-version: packageManifest
     secrets:
       github-token: ${{secrets.GITHUB_TOKEN}}

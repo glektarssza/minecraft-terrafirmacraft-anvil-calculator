@@ -1,0 +1,18 @@
+requiredScripts:
+  - build
+  - clean
+  - test
+  - lint
+trustPolicy: no-downgrade
+# -- Three (3) years, in minutes
+trustPolicyIgnoreAfter: 1578240
+preferWorkspacePackages: true
+recursiveInstall: true
+includeWorkspaceRoot: true
+shellEmulator: true
+savePrefix: ^
+sharedWorkspaceLockfile: true
+saveWorkspaceProtocol: true
+minimumReleaseAgeStrict: true
+allowBuilds:
+  '@parcel/watcher': true

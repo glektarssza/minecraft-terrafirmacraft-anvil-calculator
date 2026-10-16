@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Manual Build
+on:
+  workflow_dispatch:
+    inputs:
+      build-type:
+        description: |
+          The type of build to make.
+
+          Valid options are:
+          * "development" - A development build.
+          * "dev" - An alias for "development".
+          * "production" - A production build.
+          * "prod" - An alias for "production".
+
+          Defaults to "production".
+        type: choice
+        options:
+          - production
+          - development
+        required: true
+      upload-artifacts:
+        description: |
+          Whether to upload build artifacts.
+
+          Defaults to "false".
+        type: boolean
+        required: false
+        default: true
+      retention-days:
+        description: |
+          The number of days to retain built artifacts for.
+
+          A value of "0" will use the repository default value.
+
+          Defaults to "0".
+        type: number
+        required: false
+        default: 0
+jobs:
+  build:
+    name: Build
+    permissions:
+      # -- Needed to clone the repository
+      contents: read
+    uses: ./.github/workflows/build.yaml
+    with:
+      build-type: ${{inputs.build-type}}
+      node-version: nvmrc
+      package-manager: pnpm
+      package-manager-version: packageManifest
+      upload-artifacts: ${{inputs.upload-artifacts}}
+      retention-days: ${{inputs.retention-days}}
+    secrets:
+      github-token: ${{secrets.GITHUB_TOKEN}}

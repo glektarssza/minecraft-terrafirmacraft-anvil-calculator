@@ -21,6 +21,8 @@ on:
         description: |
           The NodeJS version to use.
 
+          Use "nvmrc" to use the value in the repository ".nvmrc" file.
+
           Defaults to "latest".
         type: string
         required: false
@@ -36,6 +38,9 @@ on:
       package-manager-version:
         description: |
           The NodeJS package manager version to use.
+
+          Use "packageManifest" to use the value specified in the package
+          manifest.
 
           Defaults to "latest".
         type: string
@@ -53,7 +58,7 @@ jobs:
     name: Spell Check
     runs-on: ubuntu-latest
     permissions:
-      # -- To clone repository
+      # -- Needed to clone the repository
       contents: read
     steps:
       - id: checkout-repository
@@ -64,20 +69,38 @@ jobs:
           lfs: true
           submodules: recursive
           token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
-      - id: setup-pnpm-package-manager
-        name: Setup NodeJS Package Manager
-        if: inputs.package-manager == 'pnpm'
+      - id: setup-pnpm-package-manager-manifest
+        name: Setup NodeJS Package Manager (Package Manifest)
+        if: inputs.package-manager == 'pnpm' && inputs.package-manager-version == 'packageManifest'
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: ./package.json
+          run_install: false
+          cache: true
+          cache_dependency_path: ./pnpm-lock.yaml
+      - id: setup-pnpm-package-manager-version
+        name: Setup NodeJS Package Manager (Version)
+        if: inputs.package-manager == 'pnpm' && inputs.package-manager-version != 'packageManifest'
         uses: pnpm/action-setup@v6
         with:
           version: ${{inputs.package-manager-version}}
           run_install: false
-          standalone: false
-      - id: setup-nodejs
-        name: Setup NodeJS
+          cache: true
+          cache_dependency_path: ./pnpm-lock.yaml
+      - id: setup-nodejs-version
+        name: Setup NodeJS (Version)
+        if: inputs.node-version != 'nvmrc'
         uses: actions/setup-node@v7
         with:
-          token: ${{env.GITHUB_TOKEN}}
           node-version: ${{inputs.node-version}}
+          token: ${{env.GITHUB_TOKEN}}
+      - id: setup-nodejs-nvmrc
+        name: Setup NodeJS (.nvmrc)
+        if: inputs.node-version == 'nvmrc'
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          token: ${{env.GITHUB_TOKEN}}
       - id: setup-non-pnpm-package-manager
         name: Setup NodeJS Package Manager
         if: inputs.package-manager != 'pnpm'

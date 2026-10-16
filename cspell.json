@@ -28,7 +28,7 @@
     "useGitignore": true,
     "gitignoreRoot": ["."],
     "caseSensitive": false,
-    "ignorePaths": ["./.git/**"],
+    "ignorePaths": ["./.git/**", "./pnpm-lock.yaml"],
     "loadDefaultConfiguration": true,
     "unknownWords": "report-all",
     "readonly": true,
