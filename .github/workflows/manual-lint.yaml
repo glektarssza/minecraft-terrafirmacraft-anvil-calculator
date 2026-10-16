@@ -11,5 +11,10 @@ jobs:
       # -- Needed to clone the repository
       contents: read
     uses: ./.github/workflows/lint.yaml
+    with:
+      git-ref: ${{github.sha}}
+      node-version: nvmrc
+      package-manager: pnpm
+      package-manager-version: packageManifest
     secrets:
       github-token: ${{secrets.GITHUB_TOKEN}}

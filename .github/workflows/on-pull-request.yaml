@@ -23,6 +23,7 @@ jobs:
           - production
     uses: ./.github/workflows/build.yaml
     with:
+      git-ref: ${{github.sha}}
       build-type: ${{matrix.build-type}}
       node-version: nvmrc
       package-manager: pnpm
@@ -48,6 +49,11 @@ jobs:
       # -- Needed to clone the repository
       contents: read
     uses: ./.github/workflows/lint.yaml
+    with:
+      git-ref: ${{github.sha}}
+      node-version: nvmrc
+      package-manager: pnpm
+      package-manager-version: packageManifest
     secrets:
       github-token: ${{secrets.GITHUB_TOKEN}}
   spell-check:
@@ -56,5 +62,10 @@ jobs:
       # -- Needed to clone the repository
       contents: read
     uses: ./.github/workflows/spell-check.yaml
+    with:
+      git-ref: ${{github.sha}}
+      node-version: nvmrc
+      package-manager: pnpm
+      package-manager-version: packageManifest
     secrets:
       github-token: ${{secrets.GITHUB_TOKEN}}
