@@ -190,7 +190,7 @@ jobs:
         if: inputs.upload-artifacts
         uses: actions/upload-artifact@v7
         with:
-          path: ./app/dist/
+          path: ./dist/
           name: dist-${{inputs.build-type}}
           if-no-files-found: error
           compression-level: 0
