@@ -1,0 +1,53 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "editor-browser",
+            "request": "launch",
+            "name": "Launch Integrated Browser",
+            "url": "http://localhost:8333",
+            "webRoot": "${workspaceFolder}",
+            "disableNetworkCache": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "outFiles": ["${workspaceFolder}/dist/**/*.(m|c|)js"],
+            "pauseForSourceMap": true,
+            "perScriptSourcemaps": "auto",
+            "showAsyncStacks": true,
+            "smartStep": true,
+            "sourceMapRenames": true,
+            "sourceMaps": true
+        },
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "Launch Microsoft Edge",
+            "url": "http://localhost:8333",
+            "webRoot": "${workspaceFolder}",
+            "disableNetworkCache": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "outFiles": ["${workspaceFolder}/dist/**/*.(m|c|)js"],
+            "pauseForSourceMap": true,
+            "perScriptSourcemaps": "auto",
+            "showAsyncStacks": true,
+            "smartStep": true,
+            "sourceMapRenames": true,
+            "sourceMaps": true
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "url": "http://localhost:8333",
+            "webRoot": "${workspaceFolder}",
+            "disableNetworkCache": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "outFiles": ["${workspaceFolder}/dist/**/*.(m|c|)js"],
+            "pauseForSourceMap": true,
+            "perScriptSourcemaps": "auto",
+            "showAsyncStacks": true,
+            "smartStep": true,
+            "sourceMapRenames": true,
+            "sourceMaps": true
+        }
+    ]
+}
