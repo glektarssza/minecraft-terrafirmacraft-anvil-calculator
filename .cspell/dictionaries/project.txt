@@ -1,4 +1,6 @@
 asexplicit
+autobuild
+dbaeumer
 ensurepath
 esbenp
 firma
@@ -11,11 +13,15 @@ iregex
 mapfile
 mpre
 netrwhist
+noarchive
 noconfirm
 noninfringement
+nvmrc
 pacman
 pipx
 remotehub
 safecrlf
 sessionx
 tarssza
+terrafirmcraft
+unstub

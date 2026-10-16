@@ -1,0 +1,116 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+name: Test
+on:
+  workflow_call:
+    inputs:
+      git-ref:
+        description: |
+          The Git reference to run the workflow on.
+
+          Must be a valid commit-ish (a branch, tag, commit, etc.).
+
+          Defaults to the reference that triggered the workflow for push and
+          pull request events ("github.ref") and the head SHA ("github.sha") for
+          all other events.
+        type: string
+        required: false
+        default: ${{github.ref || github.sha || github.event.repository.default_branch}}
+      node-version:
+        description: |
+          The NodeJS version to use.
+
+          Use "nvmrc" to use the value in the repository ".nvmrc" file.
+
+          Defaults to "latest".
+        type: string
+        required: false
+        default: latest
+      package-manager:
+        description: |
+          The NodeJS package manager to use.
+
+          Defaults to "pnpm".
+        type: string
+        required: false
+        default: pnpm
+      package-manager-version:
+        description: |
+          The NodeJS package manager version to use.
+
+          Use "packageManifest" to use the value specified in the package
+          manifest.
+
+          Defaults to "latest".
+        type: string
+        required: false
+        default: latest
+    secrets:
+      github-token:
+        description: |
+          The token to use for authentication when making calls to the GitHub
+          APIs.
+
+          Defaults to the value in "secrets.GITHUB_TOKEN" if not provided.
+        required: false
+env:
+  GITHUB_TOKEN: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    permissions:
+      # -- Needed to clone the repository
+      contents: read
+    steps:
+      - id: checkout-repository
+        name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: ${{inputs.git-ref}}
+          lfs: true
+          token: ${{env.GITHUB_TOKEN}}
+      - id: setup-pnpm-package-manager-manifest
+        name: Setup NodeJS Package Manager (Package Manifest)
+        if: inputs.package-manager == 'pnpm' && inputs.package-manager-version == 'packageManifest'
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: ./package.json
+          run_install: false
+          cache: true
+          cache_dependency_path: ./pnpm-lock.yaml
+      - id: setup-pnpm-package-manager-version
+        name: Setup NodeJS Package Manager (Version)
+        if: inputs.package-manager == 'pnpm' && inputs.package-manager-version != 'packageManifest'
+        uses: pnpm/action-setup@v6
+        with:
+          version: ${{inputs.package-manager-version}}
+          run_install: false
+          cache: true
+          cache_dependency_path: ./pnpm-lock.yaml
+      - id: setup-nodejs-version
+        name: Setup NodeJS (Version)
+        if: inputs.node-version != 'nvmrc'
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{inputs.node-version}}
+          token: ${{env.GITHUB_TOKEN}}
+      - id: setup-nodejs-nvmrc
+        name: Setup NodeJS (.nvmrc)
+        if: inputs.node-version == 'nvmrc'
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          token: ${{env.GITHUB_TOKEN}}
+      - id: install-dependencies
+        name: Install dependencies
+        run: pnpm -r install
+      - id: test
+        name: Test
+        run: pnpm run test:ci
+      - id: upload-artifacts
+        name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: ./coverage/
+          if-no-files-found: warn
