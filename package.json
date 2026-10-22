@@ -55,7 +55,7 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "@cspell/cspell-bundled-dicts": "^10.0.1",
+        "@cspell/cspell-bundled-dicts": "^10.4.0",
         "@eslint/js": "^10.0.1",
         "@rollup/plugin-replace": "^6.0.3",
         "@types/node": "^26.1.1",
