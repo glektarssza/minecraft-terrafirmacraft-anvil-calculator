@@ -61,7 +61,7 @@
         "@types/node": "^26.1.1",
         "@vitest/browser-playwright": "^4.1.10",
         "@vitest/coverage-istanbul": "^4.1.10",
-        "@vitest/eslint-plugin": "^1.6.27",
+        "@vitest/eslint-plugin": "^1.6.28",
         "cspell": "^10.4.0",
         "eslint": "^10.13.0",
         "eslint-config-prettier": "^10.1.8",
