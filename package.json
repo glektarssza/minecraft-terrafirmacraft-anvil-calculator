@@ -63,7 +63,7 @@
         "@vitest/coverage-istanbul": "^4.1.10",
         "@vitest/eslint-plugin": "^1.6.28",
         "cspell": "^10.4.0",
-        "eslint": "^10.13.0",
+        "eslint": "^10.14.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-playwright": "^2.12.2",
         "globals": "^17.14.0",
